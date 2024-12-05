@@ -1,0 +1,29 @@
+document.getElementById('searchButton')?.addEventListener('click', async () => {
+    // Get the input element for the transaction hash
+    const txHashInput = document.getElementById('txHashInput') as HTMLInputElement;
+  
+    // Ensure the txHashInput exists and is of the correct type
+    if (txHashInput) {
+      const txHash = txHashInput.value;
+  
+      if (txHash) {
+        // Make the API call to fetch transaction details
+        const response = await fetch(`/api/transactions?txHash=${txHash}`);
+        const data = await response.json();
+  
+        // Ensure transactionDataDiv exists before attempting to modify its content
+        const transactionDataDiv = document.getElementById('transactionData');
+        if (transactionDataDiv) {
+          // Display the transaction data in the HTML
+          transactionDataDiv.innerHTML = `
+            <p>Transaction Hash: ${data.result[0].hash}</p>
+            <p>From: ${data.result[0].from}</p>
+            <p>To: ${data.result[0].to}</p>
+            <p>Amount: ${data.result[0].value}</p>
+            <p>Status: ${data.result[0].isError === "0" ? 'Success' : 'Failed'}</p>
+          `;
+        }
+      }
+    }
+  });
+  

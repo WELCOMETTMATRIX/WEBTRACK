@@ -1,0 +1,195 @@
+/* Reset and box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif; /* Futuristic font */
+    background: linear-gradient(135deg, #1e1e1e, #333); /* Dark, futuristic gradient */
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Glow effect */
+.glow-text {
+    text-shadow: 0 0 10px #ff6ec7, 0 0 20px #ff6ec7, 0 0 30px #ff6ec7, 0 0 40px #ff6ec7, 0 0 50px #ff6ec7, 0 0 75px #ff6ec7, 0 0 100px #ff6ec7;
+}
+
+/* Container setup */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+/* Logo Styling */
+header img {
+    width: 200px;
+    margin-bottom: 20px;
+    animation: fadeIn 3s ease-in-out;
+}
+
+/* Title with glowing effect */
+h1 {
+    font-size: 48px;
+    color: #fff;
+    animation: fadeIn 2s ease-in-out;
+    margin-bottom: 30px;
+    font-family: 'Orbitron', sans-serif; /* Added futuristic font for header */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px #ff6ec7, 0 0 30px #ff6ec7;
+}
+
+/* Search bar styling */
+#search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#search input {
+    padding: 15px;
+    width: 300px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid #444;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+#search input:focus {
+    outline: none;
+    box-shadow: 0 0 15px #ff6ec7;
+    border-color: #ff6ec7;
+}
+
+#search button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #ff6ec7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#search button:hover {
+    background-color: #ff3881;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 1);
+}
+
+/* Ripple effect on button click */
+#search button:active {
+    animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Transactions area */
+#transactions {
+    max-height: 400px;
+    overflow-y: auto;
+    width: 80%;
+    padding: 20px;
+    margin-top: 40px;
+    border: 1px solid rgba(255, 105, 180, 0.5);
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+}
+
+#transaction-list {
+    list-style-type: none;
+    margin-top: 20px;
+}
+
+.transaction-item {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.transaction-item:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 105, 180, 0.1);
+}
+
+/* Transaction type */
+.transaction-item span {
+    display: block;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.transaction-item .transaction-type {
+    font-weight: bold;
+    font-size: 16px;
+    color: #ff6ec7;
+}
+
+/* Animation for fading in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Add some glitch-like effect for futuristic look */
+@keyframes glitch {
+    0% {
+        text-shadow: 2px 2px 5px #ff6ec7, -2px -2px 5px #ff6ec7;
+    }
+    10% {
+        text-shadow: -2px -2px 5px #ff6ec7, 2px 2px 5px #ff6ec7;
+    }
+    20% {
+        text-shadow: 2px 2px 5px #ff6ec7, -2px -2px 5px #ff6ec7;
+    }
+    30% {
+        text-shadow: -2px -2px 5px #ff6ec7, 2px 2px 5px #ff6ec7;
+    }
+    100% {
+        text-shadow: 0 0 10px #ff6ec7;
+    }
+}
+
+h1.glitch {
+    animation: glitch 1s infinite;
+}

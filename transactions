@@ -1,0 +1,49 @@
+{
+  "transactions": [
+    {
+      "hash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "from": "0xAddressFrom",
+      "to": "0xAddressTo",
+      "value": "10.5",
+      "timestamp": "2024-12-04T10:15:30Z",
+      "type": "buy",
+      "token": "BLZ",
+      "cro_spent": 10.5,
+      "blz_bought": "BLZ",
+      "gas_fee": "0.0015",
+      "transaction_fee": "0.0001",
+      "buy_amount": "10.5",
+      "sell_amount": "0.0"
+    },
+    {
+      "hash": "0xabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd",
+      "from": "0xAnotherAddressFrom",
+      "to": "0xAnotherAddressTo",
+      "value": "5.0",
+      "timestamp": "2024-12-04T11:20:15Z",
+      "type": "sell",
+      "token": "BLZ",
+      "cro_spent": "0.0",
+      "blz_bought": "0.0",
+      "gas_fee": "0.0020",
+      "transaction_fee": "0.0002",
+      "buy_amount": "0.0",
+      "sell_amount": "5.0"
+    },
+    {
+      "hash": "0x11111111111111111111111111111111111111111111111111111111111111",
+      "from": "0xDifferentAddressFrom",
+      "to": "0xDifferentAddressTo",
+      "value": "100.0",
+      "timestamp": "2024-12-04T12:45:00Z",
+      "type": "buy",
+      "token": "BLZ",
+      "cro_spent": 100.0,
+      "blz_bought": "BLZ",
+      "gas_fee": "0.005",
+      "transaction_fee": "0.0003",
+      "buy_amount": "100.0",
+      "sell_amount": "0.0"
+    }
+  ]
+}
