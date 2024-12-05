@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blazzy - Crypto Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    /* Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: url('https://ipfs.io/ipfs/QmaGjJR9WbEqcbZWTqut64iJfZ33PepcNBtsFwai7mZnKZ?filename=HH.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    header img {
+      width: 250px;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: #ff6ec7;
+      text-shadow: 0 0 20px #ff6ec7, 0 0 30px #ff6ec7;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .search-bar input {
+      padding: 15px;
+      width: 300px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 2px solid #444;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+      margin-right: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      box-shadow: 0 0 15px #ff6ec7;
+      border-color: #ff6ec7;
+    }
+
+    .search-bar button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #ff6ec7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .search-bar button:hover {
+      background-color: #ff3881;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 105, 180, 1);
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 15px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #ff6ec7;
+      border: 1px solid #ff6ec7;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      font-size: 18px;
+    }
+
+    .tab:hover {
+      background-color: #ff6ec7;
+      color: black;
+      transform: scale(1.1);
+    }
+
+    .active-tab {
+      background-color: #ff6ec7;
+      color: black;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .transactions {
+      max-height: 500px;
+      overflow-y: auto;
+      padding: 20px;
+      border: 1px solid rgba(255, 105, 180, 0.5);
+      border-radius: 12px;
+      background-color: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+    }
+
+    .transaction {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+      display: flex;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .transaction:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 105, 180, 0.1);
+    }
+
+    .transaction span {
+      color: #ccc;
+    }
+
+    .transaction .transaction-type {
+      font-weight: bold;
+      color: #ff6ec7;
+    }
+
+    .copy-button {
+      padding: 8px 15px;
+      font-size: 14px;
+      background-color: #ff6ec7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .copy-button:hover {
+      background-color: #ff3881;
+    }
+
+    .transaction-details {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://ipfs.io/ipfs/QmYukNMy9zJhBPjYPJjLHTv5VLxzzqoq55qw9uvfgYX5eU?filename=logo.png" alt="Blazzy Logo">
+      <h1>Welcome to Blazzy</h1>
+    </header>
+
+    <div class="search-bar">
+      <input type="text" id="transactionHash" placeholder="Enter Transaction Hash">
+      <button onclick="searchTransaction()">Search</button>
+    </div>
+
+    <div class="tabs">
+      <div class="tab" onclick="showTab('social')">Social & Exchanges</div>
+      <div class="tab" onclick="showTab('info')">Token Info</div>
+      <div class="tab active-tab" onclick="showTab('transactions')">Recent Transactions</div>
+    </div>
+
+    <div class="tab-content" id="social">
+      <h2>Connect with Us</h2>
+      <div class="links">
+        <a href="https://x.com/BLIZZYCRO" class="link" target="_blank">Twitter / X</a>
+        <a href="https://discord.com/invite/TQhtGG24pP" class="link" target="_blank">Discord</a>
+        <a href="https://t.me/+6uqs-4CqjrpjZWFh" class="link" target="_blank">Telegram</a>
+        <a href="https://cronoscan.com/token/0x9ef3fc220867f6cf5655db3d950cda67a3a92f9f?a=0x5f028f49a7443f34aedfc19ed986c92243d98ef5" class="link" target="_blank">Cronoscan</a>
+        <a href="https://app.cronaswap.org/stake" class="link" target="_blank">Cronoswap</a>
+      </div>
+    </div>
+
+    <div class="tab-content" id="info">
+      <h2>Blazzy Token Information</h2>
+      <p><strong>Token Symbol:</strong> BLZ</p>
+      <p><strong>Total Supply:</strong> 1,000,000,000</p>
+      <p><strong>Contract Address:</strong> <span class="transaction-type">0x9Ef3fc220867F6cF5655Db3d950cDA67A3a92F9f</span></p>
+      <p><strong>liquidity Address:</strong> <span class="transaction-type">0x5F028F49a7443f34aeDFc19ED986c92243D98EF5</span></p>
+      <button class="copy-button" onclick="copyAddress()">Copy Address</button>
+    </div>
+
+    <div class="tab-content active" id="transactions">
+      <h2>Recent Transactions</h2>
+      <div class="transactions"></div>
+    </div>
+  </div>
+
+  <script>
+    // Function to fetch and display transactions
+async function loadTransactions() {
+  try {
+    const response = await fetch('http://localhost:3000/transactions');
+    if (!response.ok) throw new Error('Error fetching transactions');
+    const transactions = await response.json();
+    console.log('Transactions:', transactions); // Log transactions to verify data
+    displayTransactions(transactions);
+  } catch (error) {
+    console.error(error);
+    alert('Unable to fetch transactions. Please try again.');
+  }
+}
+
+// Function to display transactions
+function displayTransactions(transactions) {
+  const transactionsContainer = document.querySelector('.transactions');
+  transactionsContainer.innerHTML = ''; // Clear previous data
+
+  if (transactions.length === 0) {
+    transactionsContainer.innerHTML = '<p>No transactions available.</p>';
+    return;
+  }
+
+  transactions.forEach(tx => {
+    const transactionElement = document.createElement('div');
+    transactionElement.classList.add('transaction');
+    transactionElement.innerHTML = `
+      <div>
+        <h3>Transaction Hash:</h3>
+        <p>${tx.hash}</p>
+
+        <h4>Status:</h4>
+        <p>${tx.status}</p>
+
+        <h4>Block:</h4>
+        <p>${tx.blockNumber}</p>
+        <p>${tx.blockConfirmations} Block Confirmations</p>
+
+        <h4>Timestamp:</h4>
+        <p>${tx.timestamp}</p>
+
+        <h4>Transaction Action:</h4>
+        <p>Call Method by ${tx.from} on ${tx.method}</p>
+
+        <h4>Transfers:</h4>
+        <p>From: ${tx.from}</p>
+        <p>To: ${tx.to}</p>
+
+        <!-- Removed the transfer value -->
+        
+        <button class="copy-button" onclick="copyHash('${tx.hash}')">Copy Hash</button>
+      </div>
+    `;
+    transactionsContainer.appendChild(transactionElement);
+  });
+}
+
+// Function to copy hash
+function copyHash(hash) {
+  navigator.clipboard.writeText(hash).then(() => alert('Hash copied!'));
+}
+
+// Function to copy contract address
+function copyAddress() {
+  const address = '0x1234567890abcdef';
+  navigator.clipboard.writeText(address).then(() => alert('Address copied!'));
+}
+
+// Tab navigation function
+function showTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+  document.querySelector(`#${tab}`).classList.add('active');
+  document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active-tab'));
+  document.querySelector(`.tab:contains("${tab}")`).classList.add('active-tab');
+}
+
+// Initialize the page with transactions
+window.onload = loadTransactions;
+  </script>
+</body>
+</html>
